@@ -59,6 +59,23 @@ body{
     transform: translateX(-50%);
     background-color: var(--white);
     width: min(90%, 40rem);
+    height: min(400px, 500px);
+    overflow-y: scroll;
+}
+.wrapper-todo::-webkit-scrollbar {
+    width: 10px;
+}
+
+.wrapper-todo::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+.wrapper-todo::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: hsla(0, 0%, 47%, 0.8);
+}
+.wrapper-todo::-webkit-scrollbar-thumb:hover{
+    background: hsla(0, 0%, 30%, 0.8);
 }
 .todo-list{
     padding: 20px;
