@@ -40,7 +40,7 @@ function checkTodo(e){
         todo.remove();
         deleteTodo(todo);
     }
-    if(item.classList[0] === 'todo' || 'li'){
+    if(item.classList[0] === 'todo'){
         item.classList.toggle('todo-checked');
     }
 }
