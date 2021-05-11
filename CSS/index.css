@@ -1,0 +1,106 @@
+/*Jordan Schulte*/
+:root{
+    --black: #000;
+    --white: #fff;
+    --accent: #4285F4;
+}
+/*Preset Styles*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f5f5f7;
+    font-family: 'Raleway', sans-serif;
+}
+.wrapper{
+    text-align: center;
+    user-select: none;
+}
+.wrapper h1{
+    color: var(--accent);
+    margin: 10rem 0 1.5rem 0;
+    font-size: clamp(2rem, -0.875rem + 8.333vw, 3.5rem);
+}
+.wrapper-form{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrapper-form input{
+    width: 20rem;
+    height: 2.5rem;
+    padding: 10px;
+    border: 2px solid #c5c5c5;
+}
+.wrapper-form input:hover, input:focus{
+    border-color: var(--accent);
+    outline: none;
+}
+.wrapper-form button{
+    height: 2.5rem;
+    padding: 10px; 
+    border: 2px solid #c5c5c5;
+    cursor: pointer;
+}
+.wrapper-form button:hover{
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--white);
+}
+.wrapper-todo{
+    margin: 3rem 50%;
+    transform: translateX(-50%);
+    background-color: var(--white);
+    width: min(90%, 40rem);
+}
+.todo-list{
+    padding: 20px;
+}
+.todo{
+    background: var(--white);
+    margin: 1rem 0;
+    padding: 20px;
+    text-align: left;
+    position: relative;
+    display: flex;
+    text-decoration: none;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
+    transition: 0.3s;
+    cursor: pointer;
+}
+.todo:hover{
+    background: #f5f5f7;
+}
+.todo-checked{
+    text-decoration: line-through;
+    background: #f5f5f7;
+    color: green;
+}
+.todo li{
+    list-style-type: none;
+}
+.trash-btn{
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 3rem;
+    cursor: pointer;
+    border: 1px solid var(--white);
+    background: var(--white);
+    font-size: 15pt;
+    color: var(--accent);
+}
+.fa-trash{
+    pointer-events: none;
+}
+.trash-btn:hover{
+    color: red;
+}
