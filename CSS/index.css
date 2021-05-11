@@ -63,6 +63,10 @@ body{
 .todo-list{
     padding: 20px;
 }
+.todo-list li{
+    pointer-events: none;
+    list-style-type: none;
+}
 .todo{
     background: var(--white);
     margin: 1rem 0;
@@ -83,9 +87,6 @@ body{
     background: #f5f5f7;
     color: green;
 }
-.todo li{
-    list-style-type: none;
-}
 .trash-btn{
     position: absolute;
     right: 0;
@@ -97,6 +98,7 @@ body{
     background: var(--white);
     font-size: 15pt;
     color: var(--accent);
+    pointer-events: all;
 }
 .fa-trash{
     pointer-events: none;
