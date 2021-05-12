@@ -15,13 +15,17 @@ function createTodo(event){
         alert(`To-do cannot be blank.`);
         return;
     }
+    if(userInput.value.length > 150){
+        alert(`You cannot type more than 150 characters, you typed: ${userInput.value.length}.`);
+        return;
+    }
     //DIV
     const newDiv = document.createElement('div');
     newDiv.className = 'todo';
     todoList.appendChild(newDiv);
     //LI
     const newLi = document.createElement('li');
-    newLi.innerHTML = userInput.value;
+    newLi.innerText = userInput.value;
     saveLocalTodos(userInput.value);
     newDiv.appendChild(newLi);
     //BUTTON
@@ -67,7 +71,7 @@ function getTodos(){
         todoList.appendChild(newDiv);
         //LI
         const newLi = document.createElement('li');
-        newLi.innerHTML = todo;
+        newLi.innerText = todo;
         newDiv.appendChild(newLi);
         //BUTTON
         const newBtn = document.createElement('button');
