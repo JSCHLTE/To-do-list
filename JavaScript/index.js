@@ -88,6 +88,8 @@ function getTodos(){
         newBtn.className = 'trash-btn';
         newLi.appendChild(newBtn);
         newBtn.innerHTML = '<i class="fas fa-trash"></i>';
+        notiAdd.classList.remove('noti-animate');
+        notiRemove.classList.remove('noti-animate');
         notiLoaded.classList.add('noti-animate');
     });
 }
