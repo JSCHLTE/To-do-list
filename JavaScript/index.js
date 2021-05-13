@@ -41,8 +41,11 @@ function checkTodo(e){
     if(item.classList[0] === 'trash-btn'){
         const liParent = item.parentElement;
         const todo = liParent.parentElement;
-        todo.remove();
-        deleteTodo(todo);
+        todo.classList.add('trash-animate');
+        todo.addEventListener('transitionend', function(){
+            todo.remove();
+            deleteTodo(todo);
+        });
     }
     if(item.classList[0] === 'todo'){
         item.classList.toggle('todo-checked');
