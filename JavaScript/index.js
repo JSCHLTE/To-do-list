@@ -32,6 +32,7 @@ function createTodo(event){
     saveLocalTodos(userInput.value);
     newDiv.appendChild(newLi);
     notiRemove.classList.remove('noti-animate');
+    notiLoaded.classList.remove('noti-animate');
     notiAdd.classList.add('noti-animate');
     //BUTTON
     const newBtn = document.createElement('button');
@@ -49,8 +50,9 @@ function checkTodo(e){
         todo.classList.add('trash-animate');
         todo.addEventListener('transitionend', function(){
             todo.remove();
-            notiRemove.classList.add('noti-animate');
             notiAdd.classList.remove('noti-animate');
+            notiLoaded.classList.remove('noti-animate');
+            notiRemove.classList.add('noti-animate');
             deleteTodo(todo);
         });
     }
