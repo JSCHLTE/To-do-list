@@ -4,6 +4,9 @@ const userInput = document.getElementById('user-input');
 const addBtn = document.getElementById('add-btn');
 const trashBtn = document.querySelector('.trash-btn')
 const todoList = document.querySelector('.todo-list');
+const notiAdd = document.querySelector('.noti-added');
+const notiRemove = document.querySelector('.noti-removed');
+const notiLoaded = document.querySelector('.noti-loaded');
 //Event Listeners
 document.addEventListener('DOMContentLoaded', getTodos);
 addBtn.addEventListener('click', createTodo);
@@ -28,6 +31,8 @@ function createTodo(event){
     newLi.innerText = userInput.value;
     saveLocalTodos(userInput.value);
     newDiv.appendChild(newLi);
+    notiRemove.classList.remove('noti-animate');
+    notiAdd.classList.add('noti-animate');
     //BUTTON
     const newBtn = document.createElement('button');
     newBtn.className = 'trash-btn';
@@ -44,6 +49,8 @@ function checkTodo(e){
         todo.classList.add('trash-animate');
         todo.addEventListener('transitionend', function(){
             todo.remove();
+            notiRemove.classList.add('noti-animate');
+            notiAdd.classList.remove('noti-animate');
             deleteTodo(todo);
         });
     }
@@ -81,6 +88,7 @@ function getTodos(){
         newBtn.className = 'trash-btn';
         newLi.appendChild(newBtn);
         newBtn.innerHTML = '<i class="fas fa-trash"></i>';
+        notiLoaded.classList.add('noti-animate');
     });
 }
 function deleteTodo(todo){
