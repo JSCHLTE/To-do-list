@@ -49,6 +49,7 @@ body{
     padding: 10px; 
     border: 2px solid #c5c5c5;
     cursor: pointer;
+    transition: 0.2s ease-in-out;
 }
 .wrapper-form button:hover{
     border-color: var(--accent);
@@ -60,6 +61,7 @@ body{
     transform: translateX(-50%);
     background-color: var(--white);
     width: min(90%, 40rem);
+    height: max(450px);
     overflow-y: scroll;
 }
 .wrapper-todo::-webkit-scrollbar {
