@@ -1,0 +1,231 @@
+/*Jordan Schulte*/
+:root{
+    --black: #000;
+    --white: #fff;
+    --accent: #4285F4;
+}
+.green-color{
+    color: #008000;
+}
+.red-color{
+    color: red;
+}
+.accent-color{
+    color: var(--accent);
+}
+.noti-wrapper{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    transform: translateX(-120%);
+    z-index: 2;
+}
+.noti-wrapper p{
+    padding: 20px 40px;
+    z-index: 100;
+}
+@keyframes notify{
+    0%{
+        transform: translateX(-120%);
+    }
+    25%{
+        transform: translateX(0);
+    }
+    50%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(-120%);
+    }
+}
+.noti-animate{
+    animation: notify 4s;
+}
+/*Preset Styles*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f5f5f7;
+    font-family: 'Raleway', sans-serif;
+    overflow: hidden;
+}
+.wrapper{
+    text-align: center;
+}
+.wrapper h1{
+    color: var(--accent);
+    margin: 5rem 0 1.5rem 0;
+    font-size: clamp(2rem, -0.875rem + 8.333vw, 3.5rem);
+}
+.wrapper-form{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrapper-form input{
+    width: 20rem;
+    height: 2.5rem;
+    padding: 10px;
+    border: 2px solid #c5c5c5;
+    transition: 0.2s ease-in-out;
+}
+.wrapper-form input:hover, input:focus{
+    border-color: var(--accent);
+    outline: none;
+}
+.wrapper-form button{
+    height: 2.5rem;
+    padding: 10px; 
+    border: 2px solid #c5c5c5;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+.wrapper-form button:hover{
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--white);
+}
+.wrapper-todo{
+    margin: 3rem 50%;
+    transform: translateX(-50%);
+    background-color: var(--white);
+    width: min(90%, 40rem);
+    height: max(450px);
+    overflow-y: scroll;
+}
+.wrapper-todo::-webkit-scrollbar {
+    width: 10px;
+}
+
+.wrapper-todo::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+.wrapper-todo::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: hsla(0, 0%, 47%, 0.8);
+}
+.wrapper-todo::-webkit-scrollbar-thumb:hover{
+    background: hsla(0, 0%, 30%, 0.8);
+}
+.todo-list{
+    padding: 20px;
+}
+.todo-list li{
+    pointer-events: none;
+    list-style-type: none;
+    margin: 0 50px 0 0;
+}
+.todo{
+    background: var(--white);
+    margin: 1rem 0;
+    padding: 20px;
+    text-align: left;
+    position: relative;
+    text-decoration: none;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    cursor: pointer;
+    overflow-wrap: break-word;
+}
+.todo:hover{
+    background: #f5f5f7;
+}
+.todo-checked{
+    text-decoration: line-through;
+    background: #f5f5f7;
+    color: green;
+    opacity: 0.7;
+}
+.trash-btn{
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 3rem;
+    cursor: pointer;
+    border: 1px solid var(--white);
+    background: var(--white);
+    font-size: 15pt;
+    color: var(--accent);
+    pointer-events: all;
+}
+.fa-trash{
+    pointer-events: none;
+}
+.trash-btn:hover{
+    color: red;
+}
+.trash-animate{
+    transition: 0.3s;
+    transform: translateX(-50%);
+    opacity: 0;
+}
+
+#prompt-warning {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 80%;
+    max-width: 600px;
+    min-width: 300px;
+    background: #fff;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 2rem;
+    z-index: 6;
+    display: none;
+}
+
+#prompt-warning h3 {
+    color: var(--accent)
+}
+
+#prompt-warning hr {
+    margin: 10px 0
+}
+
+.prompt-warning-buttons {
+    margin-top: 25px;
+    width: 150px;
+    display: flex;
+}
+
+.prompt-warning-buttons button {
+    width: 135px;
+    height: 35px;
+    margin: 0 10px 0 0;
+    cursor: pointer;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    color: #fff;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+.showPrompt {
+    display: block !important;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    display: none;
+}

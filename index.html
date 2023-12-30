@@ -1,0 +1,44 @@
+<!--Jordan Schulte-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, user-scalable=no, user-scalable=0">
+    <title>To-do list</title>
+    <!--FONTS-->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <!--SCRIPTS-->
+    <script src="https://kit.fontawesome.com/58b34f234f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="CSS/index.css">
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="wrapper">
+        <h1>To-do List</h1>
+        <div class="wrapper-form">
+            <form>
+                <input type="text" placeholder="Add a To-do" id="user-input">
+                <button type="submit" id="add-btn">ADD</button>
+                <button type="submit" id="del-all">CLEAR</button>
+            </form>
+        </div>
+        <div class="wrapper-todo">
+            <ul class="todo-list">
+            </ul>
+        </div>
+    </div>
+    <div id="prompt-warning">
+        <h3>Warning!</h3>
+        <hr>
+        <p>Are you sure you want to <b>delete all of your to-dos</b>? This action cannot be undone.</p>
+        <div class="prompt-warning-buttons">
+            <button id="promptYes">Yes</button>
+            <button id="promptNo">No</button>
+        </div>
+    </div>
+    <p>Jordan Schulte</p>
+    <!--JAVASCRIPT-->
+    <script src="JavaScript/index.js"></script>
+</body>
+</html>
