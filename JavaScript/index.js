@@ -1,5 +1,7 @@
 //Jordan Schulte
+
 //Query Selectors
+
 const userInput = document.getElementById('user-input');
 const addBtn = document.getElementById('add-btn');
 const trashBtn = document.querySelector('.trash-btn');
@@ -10,16 +12,20 @@ const promptNo = document.getElementById('promptNo');
 const todoList = document.querySelector('.todo-list');
 const notiWrapper = document.querySelector('.noti-wrapper');
 const overlay = document.querySelector('.overlay');
+
 //Event Listeners
+
 document.addEventListener('DOMContentLoaded', getTodos);
-addBtn.addEventListener('click', createTodo);
+addBtn.addEventListener('click', handleSubmit);
 todoList.addEventListener('click', checkTodo);
 clearBtn.addEventListener('click', promptWarning);
 promptYes.addEventListener('click', clearTodo);
 promptNo.addEventListener('click', promptWarning)
+
 //Functions
-function createTodo(event){
-    event.preventDefault();
+
+function handleSubmit(e) {
+    e.preventDefault();
     if(userInput.value == ''){
         alert(`To-do cannot be blank.`);
         return;
@@ -28,14 +34,26 @@ function createTodo(event){
         alert(`You cannot type more than 150 characters, you typed: ${userInput.value.length}.`);
         return;
     }
+    let obj = {
+        value: userInput.value,
+        id: todoList.children.length,
+        class: ''
+    }
+    createTodo(obj)
+    saveLocalTodos(obj)
+}
+
+function createTodo(info){
     //DIV
     const newDiv = document.createElement('div');
     newDiv.className = 'todo';
+    if(info.class) {
+        newDiv.classList.add('todo-checked');
+    }
     todoList.appendChild(newDiv);
     //LI
     const newLi = document.createElement('li');
-    newLi.innerText = userInput.value;
-    saveLocalTodos(userInput.value);
+    newLi.innerText = info.value;
     newDiv.appendChild(newLi);
     //BUTTON
     const newBtn = document.createElement('button');
@@ -45,8 +63,19 @@ function createTodo(event){
     userInput.value = '';
     userInput.focus();
     newNoti("<p>To-do <span class='green-color'>created</span>.</p>");
+    const newId = document.createElement('span');
+    newId.className = "spanId"
+    newId.innerText = info.id
+    newLi.appendChild(newId)
 }
+
 function checkTodo(e){
+    let todos;
+    if(localStorage.getItem('todos') === null){
+        todos = [];
+    } else{
+        todos = JSON.parse(localStorage.getItem('todos'));
+    }
     const item = e.target;
     if(item.classList[0] === 'trash-btn'){
         const liParent = item.parentElement;
@@ -58,9 +87,22 @@ function checkTodo(e){
         });
     }
     if(item.classList[0] === 'todo'){
-        item.classList.toggle('todo-checked');
+        const spanId = document.querySelector(".spanId");
+        todos.forEach(todo => {
+            if(item.children[0].children[1].innerText == todo.id) {
+                if(!todo.class) {
+                    todo.class = 'todo-checked'
+                    item.classList.add('todo-checked');
+                } else if(todo.class) {
+                    todo.class = ''
+                    item.classList.remove('todo-checked')
+                }
+            }
+        })
+        localStorage.setItem('todos', JSON.stringify(todos))
     }
 }
+
 function saveLocalTodos(todo){
     let todos;
     if(localStorage.getItem('todos') === null){
@@ -71,6 +113,7 @@ function saveLocalTodos(todo){
     todos.push(todo);
     localStorage.setItem('todos', JSON.stringify(todos));
 };
+
 function getTodos(){
     let todos;
     if(localStorage.getItem('todos') === null){
@@ -78,21 +121,9 @@ function getTodos(){
     } else{
         todos = JSON.parse(localStorage.getItem('todos'));
     }
-    todos.forEach(function(todo){
-        const newDiv = document.createElement('div');
-        newDiv.className = 'todo';
-        todoList.appendChild(newDiv);
-        //LI
-        const newLi = document.createElement('li');
-        newLi.innerText = todo;
-        newDiv.appendChild(newLi);
-        //BUTTON
-        const newBtn = document.createElement('button');
-        newBtn.className = 'trash-btn';
-        newLi.appendChild(newBtn);
-        newBtn.innerHTML = '<i class="fas fa-trash"></i>';
-    });
+    todos.forEach(todo => createTodo(todo))
 }
+
 function deleteTodo(todo){
     let todos;
     if(localStorage.getItem('todos') === null){
@@ -106,12 +137,6 @@ function deleteTodo(todo){
     newNoti("<p>To-do <span class='red-color'>deleted</span>.</p>");
 };
 
-function promptWarning(e) {
-    e.preventDefault();
-    prompt.classList.toggle('showPrompt');
-    overlay.classList.toggle('showPrompt');
-}
-
 function clearTodo(e) {
     e.preventDefault();
     localStorage.clear();
@@ -119,6 +144,12 @@ function clearTodo(e) {
     prompt.classList.toggle('showPrompt');
     overlay.classList.toggle('showPrompt');
     newNoti("<p>All To-do's have been <span class='red-color'>deleted</span>.</p>");
+}
+
+function promptWarning(e) {
+    e.preventDefault();
+    prompt.classList.toggle('showPrompt');
+    overlay.classList.toggle('showPrompt');
 }
 
 function newNoti(msg) {
