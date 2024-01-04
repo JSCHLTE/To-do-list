@@ -10,7 +10,6 @@ const prompt = document.getElementById('prompt-warning');
 const promptYes = document.getElementById('promptYes');
 const promptNo = document.getElementById('promptNo');
 const todoList = document.querySelector('.todo-list');
-const notiWrapper = document.querySelector('.noti-wrapper');
 const overlay = document.querySelector('.overlay');
 
 //Event Listeners
@@ -39,8 +38,8 @@ function handleSubmit(e) {
         id: todoList.children.length,
         class: ''
     }
-    createTodo(obj)
     saveLocalTodos(obj)
+    createTodo(obj)
 }
 
 function createTodo(info){
@@ -59,10 +58,9 @@ function createTodo(info){
     const newBtn = document.createElement('button');
     newBtn.className = 'trash-btn';
     newLi.appendChild(newBtn);
-    newBtn.innerHTML = '<i class="fas fa-trash"></i>';
+    newBtn.innerHTML = '<i class="fas fa-times"></i>';
     userInput.value = '';
     userInput.focus();
-    newNoti("<p>To-do <span class='green-color'>created</span>.</p>");
     const newId = document.createElement('span');
     newId.className = "spanId"
     newId.innerText = info.id
@@ -80,11 +78,9 @@ function checkTodo(e){
     if(item.classList[0] === 'trash-btn'){
         const liParent = item.parentElement;
         const todo = liParent.parentElement;
-        todo.classList.add('trash-animate');
-        todo.addEventListener('transitionend', function(){
-            todo.remove();
-            deleteTodo(todo);
-        });
+        todo.remove();
+        deleteTodo(todo);
+        return;
     }
     if(item.classList[0] === 'todo'){
         const spanId = document.querySelector(".spanId");
@@ -131,10 +127,15 @@ function deleteTodo(todo){
     } else{
         todos = JSON.parse(localStorage.getItem('todos'));
     }
-    const todoIndex = todo.children[0].innerText;
-    todos.splice(todos.indexOf(todoIndex), 1);
+    let str = todo.children[0].innerText;
+    str = str.slice(0, -1);
+    todos.forEach(item => {
+        if(str == item.value) {
+            todos.splice(todos.indexOf(item), 1)
+            console.log(todos)
+        }
+    })
     localStorage.setItem('todos', JSON.stringify(todos));
-    newNoti("<p>To-do <span class='red-color'>deleted</span>.</p>");
 };
 
 function clearTodo(e) {
@@ -143,7 +144,6 @@ function clearTodo(e) {
     todoList.innerHTML = "";
     prompt.classList.toggle('showPrompt');
     overlay.classList.toggle('showPrompt');
-    newNoti("<p>All To-do's have been <span class='red-color'>deleted</span>.</p>");
 }
 
 function promptWarning(e) {
@@ -151,15 +151,3 @@ function promptWarning(e) {
     prompt.classList.toggle('showPrompt');
     overlay.classList.toggle('showPrompt');
 }
-
-function newNoti(msg) {
-    const newN = document.createElement('div');
-    newN.classList.add("noti-wrapper");
-    newN.classList.add("noti-animate");
-    newN.innerHTML = msg;
-    document.body.appendChild(newN);
-    setTimeout(() => {
-        newN.remove();
-    }, 4000)
-}
-

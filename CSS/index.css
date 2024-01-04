@@ -1,64 +1,42 @@
 /*Jordan Schulte*/
 :root{
     --black: #000;
+    --light-black: #080b10;
+    --blue-black: #272932;
     --white: #fff;
-    --accent: #4285F4;
+    --accent: #7851a9 ;
 }
-.green-color{
-    color: #008000;
-}
-.red-color{
-    color: red;
-}
-.accent-color{
-    color: var(--accent);
-}
-.noti-wrapper{
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: #fff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    transform: translateX(-120%);
-    z-index: 2;
-}
-.noti-wrapper p{
-    padding: 20px 40px;
-    z-index: 100;
-}
-@keyframes notify{
-    0%{
-        transform: translateX(-120%);
-    }
-    25%{
-        transform: translateX(0);
-    }
-    50%{
-        transform: translateX(0);
-    }
-    100%{
-        transform: translateX(-120%);
-    }
-}
-.noti-animate{
-    animation: notify 4s;
-}
-/*Preset Styles*/
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 body{
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
-    background: #f5f5f7;
+    background-color: #2d3436;
+    background-image: linear-gradient(315deg, #2d3436 0%, #000000 74%);
+	background-size: 400% 400%;
+	animation: gradient 50s ease infinite;
     font-family: 'Raleway', sans-serif;
-    overflow: hidden;
 }
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
 .wrapper{
     text-align: center;
 }
@@ -72,6 +50,12 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    width: min(90%, 40rem);
+    height: max(100px);
+    background: var(--light-black);
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    margin: 0 auto;
 }
 .wrapper-form input{
     width: 20rem;
@@ -97,9 +81,11 @@ body{
     color: var(--white);
 }
 .wrapper-todo{
-    margin: 3rem 50%;
+    margin: 0rem 50%;
     transform: translateX(-50%);
-    background-color: var(--white);
+    background-color: var(--light-black);
+    border: 1px solid var(--accent);
+    border-radius: 10px;
     width: min(90%, 40rem);
     height: max(450px);
     overflow-y: scroll;
@@ -128,23 +114,25 @@ body{
     margin: 0 50px 0 0;
 }
 .todo{
-    background: var(--white);
+    background: var(--blue-black);
     margin: 1rem 0;
     padding: 20px;
     text-align: left;
     position: relative;
     text-decoration: none;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     cursor: pointer;
     overflow-wrap: break-word;
+    border-radius: 10px;
+    overflow: hidden;
+    color: #fff;
 }
 .todo:hover{
-    background: #f5f5f7;
+    text-decoration: line-through;
 }
 .todo-checked{
     text-decoration: line-through;
-    background: #f5f5f7;
+    background: var(--blue-black);
     color: green;
     opacity: 0.7;
 }
@@ -155,12 +143,17 @@ body{
     height: 100%;
     width: 3rem;
     cursor: pointer;
-    border: 1px solid var(--white);
-    background: var(--white);
+    background: var(--blue-black);
     font-size: 15pt;
     color: var(--accent);
     pointer-events: all;
+    border: 0;
 }
+
+.trash-btn i {
+    pointer-events: none;
+}
+
 .fa-trash{
     pointer-events: none;
 }
@@ -232,4 +225,14 @@ body{
 
 .todo span {
     display: none;
+}
+
+#task-count {
+    color: #fff;
+    margin: 1.25rem 0 0.5rem;
+}
+
+#watermark {
+    text-align: center;
+    color: var(--white);
 }
