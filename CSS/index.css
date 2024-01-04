@@ -23,6 +23,7 @@ body{
 	background-size: 400% 400%;
 	animation: gradient 50s ease infinite;
     font-family: 'Raleway', sans-serif;
+    overflow-x: hidden;
 }
 
 @keyframes gradient {
@@ -235,4 +236,5 @@ body{
 #watermark {
     text-align: center;
     color: var(--white);
+    padding: 2rem 0;
 }

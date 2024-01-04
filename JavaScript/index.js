@@ -11,6 +11,7 @@ const promptYes = document.getElementById('promptYes');
 const promptNo = document.getElementById('promptNo');
 const todoList = document.querySelector('.todo-list');
 const overlay = document.querySelector('.overlay');
+const taskCounter = document.getElementById('task-count');
 
 //Event Listeners
 
@@ -65,6 +66,7 @@ function createTodo(info){
     newId.className = "spanId"
     newId.innerText = info.id
     newLi.appendChild(newId)
+    updateCounter()
 }
 
 function checkTodo(e){
@@ -78,9 +80,11 @@ function checkTodo(e){
     if(item.classList[0] === 'trash-btn'){
         const liParent = item.parentElement;
         const todo = liParent.parentElement;
-        todo.remove();
-        deleteTodo(todo);
-        return;
+        todo.classList.add('trash-animate');
+        todo.addEventListener('transitionend', function(){
+            todo.remove();
+            deleteTodo(todo);
+        });
     }
     if(item.classList[0] === 'todo'){
         const spanId = document.querySelector(".spanId");
@@ -96,6 +100,7 @@ function checkTodo(e){
             }
         })
         localStorage.setItem('todos', JSON.stringify(todos))
+        updateCounter()
     }
 }
 
@@ -117,7 +122,8 @@ function getTodos(){
     } else{
         todos = JSON.parse(localStorage.getItem('todos'));
     }
-    todos.forEach(todo => createTodo(todo))
+    todos.forEach(todo => createTodo(todo));
+    updateCounter()
 }
 
 function deleteTodo(todo){
@@ -127,16 +133,31 @@ function deleteTodo(todo){
     } else{
         todos = JSON.parse(localStorage.getItem('todos'));
     }
-    let str = todo.children[0].innerText;
-    str = str.slice(0, -1);
+    let todoSpanId = todo.children[0].children[1].innerText;
     todos.forEach(item => {
-        if(str == item.value) {
+        if(item.id == todoSpanId) {
             todos.splice(todos.indexOf(item), 1)
-            console.log(todos)
         }
     })
     localStorage.setItem('todos', JSON.stringify(todos));
+    updateCounter()
 };
+
+function updateCounter() {
+    let todos;
+    if(localStorage.getItem('todos') === null){
+        todos = [];
+    } else{
+        todos = JSON.parse(localStorage.getItem('todos'));
+    }
+    const todosClass = todos.filter(item => item.class == 'todo-checked');
+    let todosCount = todos.length;
+    if(!todosCount) {
+        taskCounter.innerText = `Add some tasks!`;
+    } else {
+        taskCounter.innerText = `${todosClass.length}/${todosCount} tasks completed.`;
+    }
+}
 
 function clearTodo(e) {
     e.preventDefault();
