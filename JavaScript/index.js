@@ -4,14 +4,15 @@
 
 const userInput = document.getElementById('user-input');
 const addBtn = document.getElementById('add-btn');
-const trashBtn = document.querySelector('.trash-btn');
 const clearBtn = document.getElementById('del-all');
 const prompt = document.getElementById('prompt-warning');
 const promptYes = document.getElementById('promptYes');
 const promptNo = document.getElementById('promptNo');
+const taskCounter = document.getElementById('task-count');
+const toggleTheme = document.getElementById('toggleTheme');
+const trashBtn = document.querySelector('.trash-btn');
 const todoList = document.querySelector('.todo-list');
 const overlay = document.querySelector('.overlay');
-const taskCounter = document.getElementById('task-count');
 
 //Event Listeners
 
@@ -20,9 +21,25 @@ addBtn.addEventListener('click', handleSubmit);
 todoList.addEventListener('click', checkTodo);
 clearBtn.addEventListener('click', promptWarning);
 promptYes.addEventListener('click', clearTodo);
-promptNo.addEventListener('click', promptWarning)
+promptNo.addEventListener('click', promptWarning);
+toggleTheme.addEventListener('click', changeTheme);
+overlay.addEventListener('click', () => {
+    prompt.classList.toggle('showPrompt');
+    overlay.classList.toggle('showPrompt');
+});
 
 //Functions
+
+function changeTheme() {
+    document.body.classList.toggle('lightMode');
+    if(document.body.classList.contains('lightMode')) {
+        toggleTheme.innerHTML = '<i class="fa-solid fa-moon"></i>';
+        localStorage.setItem('lightMode', "true");
+    } else {
+        toggleTheme.innerHTML = '<i class="fa-solid fa-sun"></i>';
+        localStorage.setItem('lightMode', "false");
+    }
+}
 
 function handleSubmit(e) {
     e.preventDefault();
@@ -123,7 +140,12 @@ function getTodos(){
         todos = JSON.parse(localStorage.getItem('todos'));
     }
     todos.forEach(todo => createTodo(todo));
-    updateCounter()
+    updateCounter();
+    if(localStorage.getItem('lightMode') == "true") {
+        document.body.classList.add('lightMode');
+        toggleTheme.innerHTML = '<i class="fa-solid fa-moon"></i>';
+
+    }
 }
 
 function deleteTodo(todo){
@@ -165,6 +187,7 @@ function clearTodo(e) {
     todoList.innerHTML = "";
     prompt.classList.toggle('showPrompt');
     overlay.classList.toggle('showPrompt');
+    updateCounter();
 }
 
 function promptWarning(e) {

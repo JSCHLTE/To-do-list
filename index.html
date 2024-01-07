@@ -8,8 +8,9 @@
     <title>To-do list</title>
     <!--FONTS-->
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
-    <!--SCRIPTS-->
     <script src="https://kit.fontawesome.com/58b34f234f.js" crossorigin="anonymous"></script>
+    <!--SCRIPTS-->
+    <script src="JavaScript/index.js" defer></script>
     <link rel="stylesheet" href="CSS/index.css">
 </head>
 <body>
@@ -19,8 +20,10 @@
         <div class="wrapper-form">
             <form>
                 <input type="text" placeholder="Add a task" id="user-input">
-                <button type="submit" id="add-btn">ADD</button>
-                <button type="submit" id="del-all">CLEAR</button>
+                <div class="form-buttons">
+                    <button type="submit" id="add-btn">ADD</button>
+                    <button type="submit" id="del-all">CLEAR</button>
+                </div>
             </form>
         </div>
         <div class="wrapper-count">
@@ -40,8 +43,7 @@
             <button id="promptNo">No</button>
         </div>
     </div>
+    <div id="toggleTheme"><i class="fa-solid fa-sun"></i></div>
     <p id="watermark">Developed by <a href="https://github.com/JSCHLTE" target="_blank" rel="noreferrer">Jordan</a>!</p>
-    <!--JAVASCRIPT-->
-    <script src="JavaScript/index.js"></script>
 </body>
 </html>
