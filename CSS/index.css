@@ -26,7 +26,7 @@ body{
     display: flex;
     flex-direction: column;
     background: var(--light-black);
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
     transition: all 0.5s ease;
 }
@@ -109,7 +109,7 @@ body{
     overflow-y: scroll;
 }
 .wrapper-todo::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
 }
 
 .wrapper-todo::-webkit-scrollbar-track {
@@ -118,7 +118,7 @@ body{
 
 .wrapper-todo::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: hsla(0, 0%, 47%, 0.8);
+    background: var(--accent);
 }
 .wrapper-todo::-webkit-scrollbar-thumb:hover{
     background: hsla(0, 0%, 30%, 0.8);
@@ -148,6 +148,11 @@ body{
 .todo:hover{
     text-decoration: line-through;
 }
+
+.todo:focus {
+    text-decoration: none;
+}
+
 .todo-checked{
     text-decoration: line-through;
     background: var(--blue-black);

@@ -55,9 +55,9 @@ function handleSubmit(e) {
         value: userInput.value,
         id: todoList.children.length,
         class: ''
-    }
-    saveLocalTodos(obj)
-    createTodo(obj)
+    };
+    saveLocalTodos(obj);
+    createTodo(obj);
 }
 
 function createTodo(info){
@@ -144,7 +144,6 @@ function getTodos(){
     if(localStorage.getItem('lightMode') == "true") {
         document.body.classList.add('lightMode');
         toggleTheme.innerHTML = '<i class="fa-solid fa-moon"></i>';
-
     }
 }
 
