@@ -182,7 +182,7 @@ function updateCounter() {
 
 function clearTodo(e) {
     e.preventDefault();
-    localStorage.clear();
+    localStorage.removeItem('todos');
     todoList.innerHTML = "";
     prompt.classList.toggle('showPrompt');
     overlay.classList.toggle('showPrompt');
