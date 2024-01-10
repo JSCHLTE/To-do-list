@@ -26,9 +26,9 @@ body{
     display: flex;
     flex-direction: column;
     background: var(--light-black);
-    font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
     transition: all 0.5s ease;
+    font-family: 'Noto Sans', sans-serif;
 }
 
 .wrapper{
